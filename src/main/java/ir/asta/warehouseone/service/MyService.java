@@ -22,12 +22,9 @@ public class MyService {
 
 
     @GET
-    public String method(){
+    public Long  method(){
 
-        CategoryEntity category = categoryDao.findById(2L);
-
-        categoryDao.updateSubject("", category);
-
-        return categoryDao.findById(2L).getSubject();
+        return
+        categoryDao.loadByCode("123456").getId();
     }
 }

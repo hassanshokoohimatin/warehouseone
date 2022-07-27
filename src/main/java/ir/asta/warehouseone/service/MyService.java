@@ -7,11 +7,13 @@ import ir.asta.warehouseone.entity.CategoryEntity;
 import ir.asta.warehouseone.manager.CategoryManager;
 import ir.asta.warehouseone.manager.SortDirection;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -30,8 +32,17 @@ public class MyService {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<CategoryEntity> method(){
-        return
-        categoryManager.searchBySubject("subj", 20, 2, "", SortDirection.ASC);
+    public Response method(){
+
+        CategorySearchParamsDto paramsDto = new
+                CategorySearchParamsDto("phon", "", 5, 1, "", SortDirection.ASC);
+        List<CategoryEntity> list = categoryManager.searchCategories(paramsDto);
+
+        return Response
+                .status(Response.Status.OK)
+                .entity(list)
+                .type(MediaType.APPLICATION_JSON_TYPE)
+                .header("Access-Control-Allow-Origin", "*")
+                .build();
     }
 }

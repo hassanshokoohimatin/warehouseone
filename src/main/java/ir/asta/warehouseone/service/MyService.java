@@ -35,7 +35,7 @@ public class MyService {
     public Response method(){
 
         CategorySearchParamsDto paramsDto = new
-                CategorySearchParamsDto("phon", "", 5, 1, "", SortDirection.ASC);
+                CategorySearchParamsDto("ic", "", 10, 1, "", SortDirection.ASC);
         List<CategoryEntity> list = categoryManager.searchCategories(paramsDto);
 
         return Response

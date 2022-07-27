@@ -32,6 +32,6 @@ public class MyService {
     @Produces(MediaType.APPLICATION_JSON)
     public List<CategoryEntity> method(){
         return
-        categoryManager.searchBySubject("subj", 20, 1, "", SortDirection.ASC);
+        categoryManager.searchBySubject("subj", 20, 2, "", SortDirection.ASC);
     }
 }

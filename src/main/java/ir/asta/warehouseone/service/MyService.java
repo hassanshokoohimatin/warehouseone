@@ -1,6 +1,7 @@
 package ir.asta.warehouseone.service;
 
 import ir.asta.warehouseone.dao.CategoryDao;
+import ir.asta.warehouseone.dto.CategorySaveRequestDto;
 import ir.asta.warehouseone.entity.CategoryEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,9 +23,10 @@ public class MyService {
 
 
     @GET
-    public Long  method(){
+    public void method(){
+//        CategoryEntity category = new CategoryEntity("geographic", "8545214");
+        CategorySaveRequestDto categorySaveRequestDto = new CategorySaveRequestDto("mySubject");
 
-        return
-        categoryDao.loadByCode("123456").getId();
+        categoryDao.save(categorySaveRequestDto);
     }
 }

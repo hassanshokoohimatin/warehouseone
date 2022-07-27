@@ -24,5 +24,7 @@ public class CategoryEntity {
     }
 
     private String subject;
+
+    @Column(updatable = false)
     private String code;
 }

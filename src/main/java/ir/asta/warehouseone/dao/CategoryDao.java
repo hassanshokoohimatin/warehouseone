@@ -4,6 +4,7 @@ package ir.asta.warehouseone.dao;
 import ir.asta.warehouseone.dto.CategorySaveRequestDto;
 import ir.asta.warehouseone.entity.CategoryEntity;
 import ir.asta.warehouseone.manager.CategoryManager;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -69,6 +70,7 @@ public class CategoryDao {
     //==================================================================================================================
 
     public void save(CategoryEntity category){
+
         entityManager.persist(category);
     }
     //==================================================================================================================
@@ -81,6 +83,7 @@ public class CategoryDao {
     //==================================================================================================================
 
     public void remove(CategoryEntity category){
+
         entityManager.remove(category);
     }
     //==================================================================================================================

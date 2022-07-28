@@ -75,6 +75,8 @@ public class CategoryManager {
         }
         if (orderBy == null || orderBy.equals(""))
             orderBy = "id";
+        if (sortDirection == null)
+            sortDirection = SortDirection.ASC;
         String query = "select * from wh_category where subject like "+ sub +" order by " + orderBy +" " + sort + " " + "limit " + from + ", " + to;
         list = entityManager.createNativeQuery(query).getResultList();
         return list;

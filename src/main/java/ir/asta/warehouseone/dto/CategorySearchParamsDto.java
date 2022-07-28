@@ -1,5 +1,7 @@
 package ir.asta.warehouseone.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonValue;
 import ir.asta.warehouseone.manager.SortDirection;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,6 +18,7 @@ public class CategorySearchParamsDto {
     private Integer pageSize;
     private Integer pageNumber;
     private String orderBy;
+    @JsonValue
     private SortDirection sortDirection;
 
 }

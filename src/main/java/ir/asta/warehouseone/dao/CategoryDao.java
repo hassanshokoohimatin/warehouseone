@@ -33,7 +33,7 @@ public class CategoryDao {
     //==================================================================================================================
 
     //find all categories
-    public List<CategoryEntity> categoryEntityList(){
+    public List<CategoryEntity> findAllCategories(){
         return entityManager
                 .createQuery("select c from CategoryEntity c", CategoryEntity.class)
                 .getResultList();

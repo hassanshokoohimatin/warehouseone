@@ -13,7 +13,7 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 public class ObjectMapperConfig {
 
     @Bean
-    public Jackson2ObjectMapperBuilderCustomizer jsonCustomizer(){
+    public Jackson2ObjectMapperBuilderCustomizer mapEmptyStringToEnum(){
         return
                 builder -> builder.postConfigurer(objectMapper -> {
                    objectMapper.coercionConfigFor(LogicalType.Enum)
@@ -22,7 +22,7 @@ public class ObjectMapperConfig {
     }
 
     @Bean
-    public Jackson2ObjectMapperBuilderCustomizer jsonCustomizer_two(){
+    public Jackson2ObjectMapperBuilderCustomizer mapUnmatchedStringToEnum(){
         return
                 builder -> builder.postConfigurer(objectMapper -> {
                     objectMapper.configure(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL, true);

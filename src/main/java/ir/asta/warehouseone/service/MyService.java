@@ -34,9 +34,7 @@ public class MyService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response method(){
 
-        CategorySearchParamsDto paramsDto = new
-                CategorySearchParamsDto("ic", "", 10, 1, "", SortDirection.ASC);
-        List<CategoryEntity> list = categoryManager.searchCategories(paramsDto);
+        List<CategoryEntity> list = categoryDao.categoryEntityList();
 
         return Response
                 .status(Response.Status.OK)

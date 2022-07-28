@@ -18,7 +18,11 @@ public class CategorySearchParamsDto {
     private Integer pageSize;
     private Integer pageNumber;
     private String orderBy;
-    @JsonValue
     private SortDirection sortDirection;
 
 }
+
+
+
+
+

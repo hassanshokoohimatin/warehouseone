@@ -21,8 +21,6 @@ public class CategoryDao {
 
     @PersistenceContext
     private EntityManager entityManager;
-    @Autowired
-    private CategoryManager categoryManager;
 
     //==================================================================================================================
     //find a category with id
@@ -72,13 +70,6 @@ public class CategoryDao {
     public void save(CategoryEntity category){
 
         entityManager.persist(category);
-    }
-    //==================================================================================================================
-
-    public CategoryEntity save(CategorySaveRequestDto dto){
-        CategoryEntity category = new CategoryEntity(dto.getSubject(), categoryManager.categoryCodeGenerator());
-        entityManager.persist(category);
-        return category;
     }
     //==================================================================================================================
 

@@ -2,6 +2,7 @@ package ir.asta.warehouseone.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.asta.warehouseone.dao.CategoryDao;
+import ir.asta.warehouseone.dto.CategoryDtoPage;
 import ir.asta.warehouseone.dto.CategorySaveRequestDto;
 import ir.asta.warehouseone.dto.CategorySearchParamsDto;
 import ir.asta.warehouseone.entity.CategoryEntity;
@@ -55,12 +56,12 @@ public class MyService {
         if (dto.getSortDirection() == null){
             dto.setSortDirection(SortDirection.ASC);
         }
-        List<CategoryEntity> categoryEntities =
+        CategoryDtoPage page =
                 categoryManager.searchCategories(dto);
 
         return
         Response.status(200)
-                .entity(categoryEntities)
+                .entity(page)
                 .build();
     }
 }

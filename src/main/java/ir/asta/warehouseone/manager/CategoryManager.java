@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -57,20 +58,25 @@ public class CategoryManager {
     //todo: exception handling must be done
     @Transactional
     public CategoryDtoPage searchByCode(String code){
+        List<CategoryEntity> list = new ArrayList<>();
         TypedQuery<CategoryEntity> query = entityManager.createQuery("select c from CategoryEntity c where c.code=:code", CategoryEntity.class);
         query.setParameter("code", code);
-        CategoryEntity category = query.getSingleResult();
-        CategoryDto categoryDto = new CategoryDto();
-        categoryDto.setCode(category.getCode());
-        categoryDto.setSubject(category.getSubject());
+        CategoryEntity category = (CategoryEntity) query.getSingleResult();
+        list.add(category);
         CategoryDtoPage page = new CategoryDtoPage();
+        CategoryDto categoryDto = new CategoryDto();
+        categoryDto.setSubject(category.getSubject());
+        categoryDto.setCode(category.getCode());
         page.getItems().add(categoryDto);
+        page.setTotalCount(1L);
         return page;
         //todo: totalCount must be edited
     }
 
     @Transactional
     public CategoryDtoPage search(String subject, Integer pageSize, Integer pageNumber, String orderBy, SortDirection sortDirection){
+        BigInteger totalCount;
+        List<CategoryEntity> list = new ArrayList<>();
         Integer from = 1;
         Integer to = 10;
         String sub = "'%"+subject+"%'";
@@ -92,15 +98,12 @@ public class CategoryManager {
         if (sortDirection == null)
             sortDirection = SortDirection.ASC;
         String query = "select * from wh_category where subject like "+ sub +" order by " + orderBy +" " + sort + " " + "limit " + from + ", " + to;
-        List<CategoryEntity> list = entityManager.createNativeQuery(query).getResultList();
-
-
-        CategoryDtoPage page = new CategoryDtoPage();
-        page.setPageSize(pageSize);
-        page.setPageNumber(pageNumber);
-        page.setTotalCount(100L);
-        return page;
-        //todo: totalCount must be edited
+        list = entityManager.createNativeQuery(query, CategoryEntity.class).getResultList();
+        String countQuery = "select count(id) from wh_category where subject like "+ sub ;
+        totalCount = (BigInteger) entityManager.createNativeQuery(countQuery).getSingleResult();
+        Long totalCountLong = totalCount.longValue();
+        return
+                mapper.searchResult(list, pageSize, pageNumber, totalCountLong);
     }
 
     @Transactional

@@ -8,7 +8,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CategorySaveRequestDto {
+public class CategoryDto {
 
     private String subject;
+    private String code;
 }

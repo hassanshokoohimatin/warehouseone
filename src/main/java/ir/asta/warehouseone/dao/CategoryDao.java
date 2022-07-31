@@ -1,13 +1,6 @@
 package ir.asta.warehouseone.dao;
-
-
-import ir.asta.warehouseone.dto.CategorySaveRequestDto;
 import ir.asta.warehouseone.entity.CategoryEntity;
-import ir.asta.warehouseone.manager.CategoryManager;
-import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -21,8 +14,6 @@ public class CategoryDao {
 
     @PersistenceContext
     private EntityManager entityManager;
-    @Autowired
-    private CategoryManager categoryManager;
 
     //==================================================================================================================
     //find a category with id
@@ -75,13 +66,6 @@ public class CategoryDao {
     }
     //==================================================================================================================
 
-    public CategoryEntity save(CategorySaveRequestDto dto){
-        CategoryEntity category = new CategoryEntity(dto.getSubject(), categoryManager.categoryCodeGenerator());
-        entityManager.persist(category);
-        return category;
-    }
-    //==================================================================================================================
-
     public void remove(CategoryEntity category){
 
         entityManager.remove(category);
@@ -99,6 +83,4 @@ public class CategoryDao {
         CategoryEntity category = loadByCode(code); //todo: if category not found throw CategoryNotFound
         entityManager.remove(category);             //todo: now we dont consider relation
     }
-
-
 }

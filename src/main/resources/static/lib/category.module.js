@@ -1,0 +1,1 @@
+let warehouseCategory = angular.module('warehouse.category', ["ngResource"]);

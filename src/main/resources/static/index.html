@@ -3,10 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script src="lib/angular/angular.min.js"></script>
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/angular/angular-resource.js"></script>
+    <script src="lib/category.module.js"></script>
+    <script src="lib/category.controllers.js"></script>
+    <script src="lib/category.service.js"></script>
 </head>
-<body ng-app>
-<input type="text" ng-model="myModel">
-{{myModel}}
+<body ng-app="warehouse.category">
+    <div ng-controller="CategoryListController">
+        <h1>Categories</h1>
+        <h2>Search Criteria</h2>
+
+        <label>Subject</label><input type="text" ng-model="subject"><br><br>
+
+        <label>Code</label><input type="text" ng-model="code"><br><br>
+
+        <label>Page Size</label>
+        <input type="radio" name="pageSize" value="10" ng-model="pageSize"> 10
+        <input type="radio" name="pageSize" value="25" ng-model="pageSize"> 25<br>
+
+        <button type="button" ng-click="submit(subject, code, pageSize)">Search</button>
+
+    </div>
 </body>
 </html>
